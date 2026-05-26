@@ -9,6 +9,8 @@
  */
 
 import type * as lib_anthropic from "../lib/anthropic.js";
+import type * as radars from "../radars.js";
+import type * as radarsActions from "../radarsActions.js";
 import type * as users from "../users.js";
 
 import type {
@@ -19,6 +21,8 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "lib/anthropic": typeof lib_anthropic;
+  radars: typeof radars;
+  radarsActions: typeof radarsActions;
   users: typeof users;
 }>;
 
