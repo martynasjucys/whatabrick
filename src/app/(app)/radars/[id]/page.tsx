@@ -15,6 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ItemSearch } from "./_components/item-search";
+import { TrackedItemsList } from "./_components/tracked-items-list";
 
 type Region = "EU" | "UK" | "US" | "GLOBAL";
 const REGIONS: Region[] = ["EU", "UK", "US", "GLOBAL"];
@@ -136,9 +138,17 @@ export default function RadarDetailPage({
         <h2 className="text-[13px] font-medium uppercase tracking-[0.4px] text-[var(--ink-subtle)]">
           Tracked items
         </h2>
-        <p className="mt-3 text-sm text-[var(--ink-subtle)]">
-          Item tracking is added in the next feature.
-        </p>
+        <div className="mt-4">
+          <ItemSearch
+            radarId={radarId}
+            radarContext={{
+              theme: radar.theme,
+              productType: radar.productType,
+              niche: radar.niche,
+            }}
+          />
+          <TrackedItemsList radarId={radarId} />
+        </div>
       </section>
 
       <section className="mt-14 border-t border-border pt-6">

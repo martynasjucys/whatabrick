@@ -8,7 +8,10 @@
  * @module
  */
 
+import type * as items from "../items.js";
+import type * as itemsActions from "../itemsActions.js";
 import type * as lib_anthropic from "../lib/anthropic.js";
+import type * as lib_rebrickable from "../lib/rebrickable.js";
 import type * as radars from "../radars.js";
 import type * as radarsActions from "../radarsActions.js";
 import type * as users from "../users.js";
@@ -20,7 +23,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  items: typeof items;
+  itemsActions: typeof itemsActions;
   "lib/anthropic": typeof lib_anthropic;
+  "lib/rebrickable": typeof lib_rebrickable;
   radars: typeof radars;
   radarsActions: typeof radarsActions;
   users: typeof users;

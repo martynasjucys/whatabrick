@@ -8,7 +8,7 @@ Status legend: `🟢 Done` · `🟡 In progress` · `⚪ Not started` · `🔵 B
 |---|---|---|---|---|---|
 | 0 | [foundation](./foundation/) | 🟢 Done | — | [SPEC](./foundation/SPEC.md) | [Plan](./foundation/foundation-implementation-plan.md) |
 | 1 | [radars](./radars/) | 🟢 Done | foundation | [SPEC](./radars/SPEC.md) | [Plan](./radars/radars-implementation-plan.md) |
-| 2 | [catalog-items](./catalog-items/) | ⚪ Not started | foundation | [SPEC](./catalog-items/SPEC.md) | [Plan](./catalog-items/catalog-items-implementation-plan.md) |
+| 2 | [catalog-items](./catalog-items/) | 🟢 Done | foundation | [SPEC](./catalog-items/SPEC.md) | [Plan](./catalog-items/catalog-items-implementation-plan.md) |
 | 3 | [market-tracking](./market-tracking/) | ⚪ Not started | catalog-items | [SPEC](./market-tracking/SPEC.md) | [Plan](./market-tracking/market-tracking-implementation-plan.md) |
 | 4 | [item-verdicts](./item-verdicts/) | ⚪ Not started | market-tracking | [SPEC](./item-verdicts/SPEC.md) | [Plan](./item-verdicts/item-verdicts-implementation-plan.md) |
 | 5 | [alerts](./alerts/) | ⚪ Not started | market-tracking, item-verdicts | [SPEC](./alerts/SPEC.md) | [Plan](./alerts/alerts-implementation-plan.md) |
