@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nurtia Project Context"
+  short_description: "Product + architecture context for Nurtia"
+  default_prompt: "Use $nurtia-product-context to plan or implement a Nurtia feature across spaces, signals, automations, Convex, or ephemeris code."
