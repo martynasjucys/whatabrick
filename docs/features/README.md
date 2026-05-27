@@ -9,11 +9,11 @@ Status legend: `🟢 Done` · `🟡 In progress` · `⚪ Not started` · `🔵 B
 | 0 | [foundation](./foundation/) | 🟢 Done | — | [SPEC](./foundation/SPEC.md) | [Plan](./foundation/foundation-implementation-plan.md) |
 | 1 | [radars](./radars/) | 🟢 Done | foundation | [SPEC](./radars/SPEC.md) | [Plan](./radars/radars-implementation-plan.md) |
 | 2 | [catalog-items](./catalog-items/) | 🟢 Done | foundation | [SPEC](./catalog-items/SPEC.md) | [Plan](./catalog-items/catalog-items-implementation-plan.md) |
-| 3 | [market-tracking](./market-tracking/) | ⚪ Not started | catalog-items | [SPEC](./market-tracking/SPEC.md) | [Plan](./market-tracking/market-tracking-implementation-plan.md) |
-| 4 | [item-verdicts](./item-verdicts/) | ⚪ Not started | market-tracking | [SPEC](./item-verdicts/SPEC.md) | [Plan](./item-verdicts/item-verdicts-implementation-plan.md) |
-| 5 | [alerts](./alerts/) | ⚪ Not started | market-tracking, item-verdicts | [SPEC](./alerts/SPEC.md) | [Plan](./alerts/alerts-implementation-plan.md) |
-| 6 | [weekly-digest](./weekly-digest/) | ⚪ Not started | alerts, item-verdicts | [SPEC](./weekly-digest/SPEC.md) | [Plan](./weekly-digest/weekly-digest-implementation-plan.md) |
-| 7 | [dashboard](./dashboard/) | ⚪ Not started | all of the above | [SPEC](./dashboard/SPEC.md) | [Plan](./dashboard/dashboard-implementation-plan.md) |
+| 3 | [market-tracking](./market-tracking/) | 🟢 Done | catalog-items | [SPEC](./market-tracking/SPEC.md) | [Plan](./market-tracking/market-tracking-implementation-plan.md) |
+| 4 | [item-verdicts](./item-verdicts/) | 🟢 Done | market-tracking | [SPEC](./item-verdicts/SPEC.md) | [Plan](./item-verdicts/item-verdicts-implementation-plan.md) |
+| 5 | [alerts](./alerts/) | 🟢 Done | market-tracking, item-verdicts | [SPEC](./alerts/SPEC.md) | [Plan](./alerts/alerts-implementation-plan.md) |
+| 6 | [weekly-digest](./weekly-digest/) | 🟢 Done | alerts, item-verdicts | [SPEC](./weekly-digest/SPEC.md) | [Plan](./weekly-digest/weekly-digest-implementation-plan.md) |
+| 7 | [dashboard](./dashboard/) | 🟡 Awaiting smoke test | all of the above | [SPEC](./dashboard/SPEC.md) | [Plan](./dashboard/dashboard-implementation-plan.md) |
 
 ## Dependency graph
 

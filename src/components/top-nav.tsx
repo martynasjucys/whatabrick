@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
+import { NotificationBell } from "@/components/notification-bell";
 
 export function TopNav() {
   return (
@@ -11,10 +12,17 @@ export function TopNav() {
         >
           Whatabrick
         </Link>
-        <nav className="flex items-center gap-6 text-sm text-[var(--ink-subtle)]">
+        <nav className="flex items-center gap-4 text-sm text-[var(--ink-subtle)]">
           <Link href="/dashboard" className="hover:text-foreground">
             Dashboard
           </Link>
+          <Link href="/digest" className="hover:text-foreground">
+            Digest
+          </Link>
+          <Link href="/settings" className="hover:text-foreground">
+            Settings
+          </Link>
+          <NotificationBell />
           <UserButton />
         </nav>
       </div>

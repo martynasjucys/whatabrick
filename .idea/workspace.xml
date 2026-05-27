@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92763b75-26c5-43ca-8662-3aca6f886e63" name="Changes" comment="Human design page redesign">
+    <list default="true" id="92763b75-26c5-43ca-8662-3aca6f886e63" name="Changes" comment="Brick catalog feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/convex/_generated/api.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/_generated/api.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/items.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/items.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/itemsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/itemsActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/schema.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(app)/radars/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(app)/radars/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(app)/dashboard/_components/radars-list.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(app)/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(app)/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(app)/items/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(app)/items/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(app)/radars/[id]/_components/tracked-items-list.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(app)/radars/[id]/_components/tracked-items-list.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/top-nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/top-nav.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +77,10 @@
 }]]></component>
   <component name="RecapSpentCounter">
     <option name="endsOfQuotaMs" value="1780606807991" />
-    <option name="spentUsd" value="0.0426585" />
+    <option name="spentUsd" value="0.054165553" />
   </component>
   <component name="RecapUselessUpdatesCounter">
-    <option name="suspendCountdown" value="9" />
+    <option name="suspendCountdown" value="1" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -96,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1779797872156</updated>
-      <workItem from="1779797873187" duration="6732000" />
+      <workItem from="1779797873187" duration="16696000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup">
       <option name="closed" value="true" />
@@ -154,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779804675599</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Brick catalog feature">
+      <option name="closed" value="true" />
+      <created>1779805449708</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1779805449708</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +186,7 @@
     <MESSAGE value="Swap icon library" />
     <MESSAGE value="Foundation feature implemented" />
     <MESSAGE value="Human design page redesign" />
-    <option name="LAST_COMMIT_MESSAGE" value="Human design page redesign" />
+    <MESSAGE value="Brick catalog feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Brick catalog feature" />
   </component>
 </project>

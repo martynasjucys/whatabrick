@@ -6,6 +6,9 @@ import { useQuery } from "convex/react";
 import { api, type Id } from "@/lib/convex-api";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MarketCard } from "./_components/market-card";
+import { VerdictCard } from "./_components/verdict-card";
+import { AlertControls } from "./_components/alert-controls";
 
 export default function ItemDetailPage({
   params,
@@ -81,23 +84,9 @@ export default function ItemDetailPage({
         </div>
       </div>
 
-      <section className="mt-12 rounded-xl border border-border bg-card p-6">
-        <p className="text-[13px] font-medium uppercase tracking-[0.4px] text-[var(--ink-subtle)]">
-          Market
-        </p>
-        <p className="mt-2 text-sm text-[var(--ink-subtle)]">
-          Price snapshots and chart arrive in the market-tracking feature.
-        </p>
-      </section>
-
-      <section className="mt-6 rounded-xl border border-border bg-card p-6">
-        <p className="text-[13px] font-medium uppercase tracking-[0.4px] text-[var(--ink-subtle)]">
-          Verdict
-        </p>
-        <p className="mt-2 text-sm text-[var(--ink-subtle)]">
-          AI verdict arrives in the item-verdicts feature.
-        </p>
-      </section>
+      <VerdictCard itemId={itemId} />
+      <MarketCard itemId={itemId} />
+      <AlertControls itemId={itemId} />
     </div>
   );
 }

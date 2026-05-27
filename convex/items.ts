@@ -1,4 +1,5 @@
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 import {
   internalMutation,
   internalQuery,
@@ -16,6 +17,7 @@ const rebrickableTypeValidator = v.union(
 const candidateValidator = v.object({
   rebrickableType: rebrickableTypeValidator,
   rebrickableId: v.string(),
+  brickLinkId: v.optional(v.string()),
   name: v.string(),
   imageUrl: v.optional(v.string()),
   releaseYear: v.optional(v.number()),
@@ -89,15 +91,23 @@ export const addTrackedItem = mutation({
       )
       .unique();
 
-    const itemId = existingItem
-      ? existingItem._id
-      : await ctx.db.insert("items", {
-          rebrickableType: candidate.rebrickableType,
-          rebrickableId: candidate.rebrickableId,
-          name: candidate.name,
-          imageUrl: candidate.imageUrl,
-          releaseYear: candidate.releaseYear,
-        });
+    let itemId;
+    if (existingItem) {
+      itemId = existingItem._id;
+      // If we now know a brickLinkId and the existing row doesn't, fill it in.
+      if (candidate.brickLinkId && !existingItem.brickLinkId) {
+        await ctx.db.patch(itemId, { brickLinkId: candidate.brickLinkId });
+      }
+    } else {
+      itemId = await ctx.db.insert("items", {
+        rebrickableType: candidate.rebrickableType,
+        rebrickableId: candidate.rebrickableId,
+        brickLinkId: candidate.brickLinkId,
+        name: candidate.name,
+        imageUrl: candidate.imageUrl,
+        releaseYear: candidate.releaseYear,
+      });
+    }
 
     const existingTracked = await ctx.db
       .query("trackedItems")
@@ -107,12 +117,21 @@ export const addTrackedItem = mutation({
       .unique();
     if (existingTracked) return existingTracked._id;
 
-    return await ctx.db.insert("trackedItems", {
+    const trackedId = await ctx.db.insert("trackedItems", {
       radarId,
       itemId,
       userId: user._id,
       addedAt: Date.now(),
     });
+
+    // Kick off the first BrickLink snapshot so the chart has a starting point.
+    await ctx.scheduler.runAfter(
+      0,
+      internal.marketSnapshotsActions.refreshItem,
+      { itemId, region: radar.region },
+    );
+
+    return trackedId;
   },
 });
 
@@ -167,6 +186,11 @@ export const _patchMetadata = internalMutation({
       reissueRisk: v.optional(
         v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
       ),
+      bricklinkStatus: v.optional(
+        v.union(v.literal("priced"), v.literal("unpriced")),
+      ),
+      bricklinkLastError: v.optional(v.string()),
+      lastBrickLinkSyncAt: v.optional(v.number()),
     }),
   },
   handler: async (ctx, { itemId, fields }) => {

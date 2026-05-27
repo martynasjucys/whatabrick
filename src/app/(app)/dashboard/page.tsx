@@ -1,9 +1,5 @@
-import { RadarsList } from "./_components/radars-list";
+import { DashboardView } from "./_components/dashboard-view";
 
 export default function DashboardPage() {
-  return (
-    <div className="py-8">
-      <RadarsList />
-    </div>
-  );
+  return <DashboardView />;
 }

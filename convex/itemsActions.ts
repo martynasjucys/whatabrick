@@ -8,6 +8,22 @@ import {
   type RebrickableHit,
   type RebrickableType,
 } from "./lib/rebrickable";
+import {
+  catalogItem,
+  normalizeBrickLinkImageUrl,
+  type BrickLinkType,
+} from "./lib/bricklink";
+
+// BrickLink item-id patterns. We try these BEFORE the AI-driven path so that
+// users who paste a BrickLink id (e.g. `sh0272`, `mc001`, `10261-1`) get an
+// immediate authoritative match — Rebrickable's `?search=` doesn't query the
+// external_ids field, so those ids would otherwise come up empty.
+const BL_MINIFIG_ID = /^[a-z]{2,6}\d{2,6}$/i;
+const BL_SET_ID = /^\d{3,7}(-\d+)?$/;
+const BL_TYPE_MAP: Record<"minifig" | "set", BrickLinkType> = {
+  minifig: "MINIFIG",
+  set: "SET",
+};
 
 const SYSTEM_PROMPT = `You are a LEGO catalog query generator working inside the Whatabrick app.
 
@@ -40,6 +56,16 @@ export const searchByDescription = action({
   handler: async (_ctx, { query, radarContext }) => {
     const trimmed = query.trim();
     if (trimmed.length < 2) return { candidates: [] as ScoredCandidate[] };
+
+    // Direct BrickLink id lookup — bypasses Rebrickable's name-only search.
+    const blDirect = await tryBrickLinkIdLookup(trimmed);
+    if (blDirect) {
+      return {
+        candidates: blDirect.candidates,
+        queries: [trimmed],
+        itemTypeGuess: blDirect.type,
+      };
+    }
 
     const client = anthropic();
     const response = await client.messages.create({
@@ -212,7 +238,68 @@ export const searchByBrickLinkId = action({
 type ScoredCandidate = {
   rebrickableType: RebrickableType;
   rebrickableId: string;
+  brickLinkId?: string;
   name: string;
   imageUrl?: string;
   releaseYear?: number;
 };
+
+/**
+ * Detect when the user's query looks like a BrickLink item id (e.g. `sh0272`,
+ * `mc001`, `10261-1`) and look it up directly against BrickLink's catalog.
+ * Rebrickable's `?search=` doesn't query the external_ids field, so these
+ * would otherwise come up empty.
+ *
+ * When BrickLink confirms the item, we also try a Rebrickable name search to
+ * recover the canonical rebrickableId. Falls back to a synthetic record using
+ * the BrickLink id as the rebrickableId for dedupe purposes.
+ */
+async function tryBrickLinkIdLookup(
+  raw: string,
+): Promise<{ type: RebrickableType; candidates: ScoredCandidate[] } | null> {
+  const trimmed = raw.trim();
+  let type: keyof typeof BL_TYPE_MAP | null = null;
+  if (BL_MINIFIG_ID.test(trimmed)) type = "minifig";
+  else if (BL_SET_ID.test(trimmed)) type = "set";
+  if (!type) return null;
+
+  let blItem;
+  try {
+    blItem = await catalogItem({ type: BL_TYPE_MAP[type], no: trimmed });
+  } catch {
+    return null;
+  }
+
+  const imageUrl = normalizeBrickLinkImageUrl(blItem.image_url);
+
+  // Try to enrich with the Rebrickable canonical id by searching its name.
+  const rbHits = await searchByType(type, blItem.name, 5).catch(() => [] as RebrickableHit[]);
+  if (rbHits.length > 0) {
+    const candidates: ScoredCandidate[] = rbHits.slice(0, 3).map((hit) => ({
+      rebrickableType: hit.type,
+      rebrickableId: hit.id,
+      brickLinkId: blItem.no,
+      name: hit.name,
+      imageUrl: hit.imageUrl ?? imageUrl,
+      releaseYear: hit.year ?? blItem.year_released,
+    }));
+    return { type, candidates };
+  }
+
+  // No Rebrickable match — surface the BrickLink item directly. We use the
+  // BrickLink id as the synthetic rebrickableId so the dedupe index still
+  // works (BrickLink ids and Rebrickable ids don't collide in practice).
+  return {
+    type,
+    candidates: [
+      {
+        rebrickableType: type,
+        rebrickableId: blItem.no,
+        brickLinkId: blItem.no,
+        name: blItem.name,
+        imageUrl,
+        releaseYear: blItem.year_released,
+      },
+    ],
+  };
+}
